@@ -19,6 +19,21 @@ Swordsmith-Coder is a fork of [OpenCode](https://github.com/sst/opencode) that u
 
 ## Installation
 
+### Quick Install (Recommended)
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/fgravato/swordsmith-coder/main/install.sh | bash
+```
+
+The installer will:
+- Clone the repository
+- Install dependencies
+- Ask for your OpenRouter API key
+- Add it to your shell profile
+- Create a default config
+
+### Manual Install
+
 ```bash
 # Clone the repository
 git clone https://github.com/fgravato/swordsmith-coder.git
@@ -26,6 +41,9 @@ cd swordsmith-coder
 
 # Install dependencies
 bun install
+
+# Set your API key
+export OPENROUTER_API_KEY="your-key-here"
 
 # Run
 bun run dev
