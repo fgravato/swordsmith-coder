@@ -142,8 +142,13 @@ install_dependencies() {
     cd "$HOME/.swordsmith-coder"
     
     if command -v bun &> /dev/null; then
+        # Install root dependencies first, then package-specific
+        bun install --ignore-scripts 2>/dev/null || true
+        cd packages/opencode
         bun install
     elif command -v npm &> /dev/null; then
+        npm install --ignore-scripts 2>/dev/null || true
+        cd packages/opencode
         npm install
     else
         warn "No package manager found. Please install bun or npm and run 'bun install' manually."
@@ -155,7 +160,7 @@ create_launcher() {
     
     cat > "$INSTALL_DIR/$BINARY_NAME" << 'EOF'
 #!/usr/bin/env bash
-cd "$HOME/.swordsmith-coder"
+cd "$HOME/.swordsmith-coder/packages/opencode"
 if command -v bun &> /dev/null; then
     exec bun run dev "$@"
 else
