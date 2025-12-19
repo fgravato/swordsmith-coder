@@ -100,7 +100,7 @@ export namespace Server {
         "/global/event",
         describeRoute({
           summary: "Get global events",
-          description: "Subscribe to global events from the OpenCode system using server-sent events.",
+          description: "Subscribe to global events from the Swordsmith Coder system using server-sent events.",
           operationId: "global.event",
           responses: {
             200: {
@@ -167,7 +167,7 @@ export namespace Server {
         "/global/dispose",
         describeRoute({
           summary: "Dispose instance",
-          description: "Clean up and dispose all OpenCode instances, releasing all resources.",
+          description: "Clean up and dispose all Swordsmith Coder instances, releasing all resources.",
           operationId: "global.dispose",
           responses: {
             200: {
@@ -207,9 +207,9 @@ export namespace Server {
         openAPIRouteHandler(app, {
           documentation: {
             info: {
-              title: "opencode",
+              title: "swordsmith-coder",
               version: "0.0.3",
-              description: "opencode api",
+              description: "swordsmith-coder api",
             },
             openapi: "3.1.1",
           },
@@ -223,7 +223,7 @@ export namespace Server {
         "/pty",
         describeRoute({
           summary: "List PTY sessions",
-          description: "Get a list of all active pseudo-terminal (PTY) sessions managed by OpenCode.",
+          description: "Get a list of all active pseudo-terminal (PTY) sessions managed by Swordsmith Coder.",
           operationId: "pty.list",
           responses: {
             200: {
@@ -382,7 +382,7 @@ export namespace Server {
         "/config",
         describeRoute({
           summary: "Get configuration",
-          description: "Retrieve the current OpenCode configuration settings and preferences.",
+          description: "Retrieve the current Swordsmith Coder configuration settings and preferences.",
           operationId: "config.get",
           responses: {
             200: {
@@ -404,7 +404,7 @@ export namespace Server {
         "/config",
         describeRoute({
           summary: "Update configuration",
-          description: "Update OpenCode configuration settings and preferences.",
+          description: "Update Swordsmith Coder configuration settings and preferences.",
           operationId: "config.update",
           responses: {
             200: {
@@ -2503,11 +2503,12 @@ export namespace Server {
           })
         },
       )
+      // TODO: Update desktop proxy URL when swordsmith-coder backend is available
       .all("/*", async (c) => {
-        return proxy(`https://desktop.opencode.ai${c.req.path}`, {
+        return proxy(`https://desktop.swordsmith-coder.example.com${c.req.path}`, {
           ...c.req,
           headers: {
-            host: "desktop.opencode.ai",
+            host: "desktop.swordsmith-coder.example.com",
           },
         })
       }),
@@ -2517,9 +2518,9 @@ export namespace Server {
     const result = await generateSpecs(App(), {
       documentation: {
         info: {
-          title: "opencode",
+          title: "swordsmith-coder",
           version: "1.0.0",
-          description: "opencode api",
+          description: "swordsmith-coder api",
         },
         openapi: "3.1.1",
       },

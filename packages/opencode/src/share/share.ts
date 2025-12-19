@@ -65,9 +65,11 @@ export namespace Share {
     })
   }
 
+  // TODO: Update share API URL when swordsmith-coder backend is available
   export const URL =
+    process.env["SWORDSMITH_CODER_API"] ??
     process.env["OPENCODE_API"] ??
-    (Installation.isPreview() || Installation.isLocal() ? "https://api.dev.opencode.ai" : "https://api.opencode.ai")
+    (Installation.isPreview() || Installation.isLocal() ? "https://api.dev.swordsmith-coder.example.com" : "https://api.swordsmith-coder.example.com")
 
   export async function create(sessionID: string) {
     return fetch(`${URL}/share_create`, {

@@ -124,6 +124,10 @@ export namespace Agent {
         },
         mode: "primary",
         native: true,
+        model: {
+          providerID: "openrouter",
+          modelID: "openai/gpt-5.2",
+        },
       },
       general: {
         name: "general",
@@ -154,6 +158,21 @@ export namespace Agent {
         permission: agentPermission,
         mode: "subagent",
         native: true,
+      },
+      docs: {
+        name: "docs",
+        description: `Documentation agent specialized for creating and editing markdown files, READMEs, technical specifications, project plans, and other documentation. Uses advanced reasoning models optimized for structured writing and markup.`,
+        tools: {
+          ...defaultTools,
+        },
+        options: {},
+        permission: agentPermission,
+        mode: "all",
+        native: true,
+        model: {
+          providerID: "openrouter",
+          modelID: "google/gemini-2.5-pro",
+        },
       },
       compaction: {
         name: "compaction",
@@ -186,6 +205,10 @@ export namespace Agent {
         permission: agentPermission,
         prompt: PROMPT_SUMMARY,
         tools: {},
+        model: {
+          providerID: "openrouter",
+          modelID: "google/gemini-2.5-pro",
+        },
       },
     }
     for (const [key, value] of Object.entries(cfg.agent ?? {})) {

@@ -50,10 +50,17 @@ export namespace Project {
       await matches.return()
       if (git) {
         let worktree = path.dirname(git)
-        let id = await Bun.file(path.join(git, "opencode"))
+        let id = await Bun.file(path.join(git, "swordsmith-coder"))
           .text()
           .then((x) => x.trim())
           .catch(() => {})
+        // Fallback to legacy opencode file
+        if (!id) {
+          id = await Bun.file(path.join(git, "opencode"))
+            .text()
+            .then((x) => x.trim())
+            .catch(() => {})
+        }
         if (!id) {
           const roots = await $`git rev-list --max-parents=0 --all`
             .quiet()
@@ -68,7 +75,7 @@ export namespace Project {
                 .toSorted(),
             )
           id = roots[0]
-          if (id) Bun.file(path.join(git, "opencode")).write(id)
+          if (id) Bun.file(path.join(git, "swordsmith-coder")).write(id)
         }
         if (!id)
           return {
